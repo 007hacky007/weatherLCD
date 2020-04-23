@@ -113,6 +113,13 @@ def get_current_weather():
 
 
 def main():
+    try:
+        if os.environ['WEATHER_ID'] == "" or os.environ['WEATHER_APPID'] == "":
+            print("Please set 'WEATHER_ID' and 'WEATHER_APPID' ENV variables")
+
+    except KeyError as e:
+        print("ENV variable", e, "is not set")
+
     forecast_line = get_forecast()
     forecast_cache = time.time() + 60 * 60 * 2
     weather = get_current_weather()
